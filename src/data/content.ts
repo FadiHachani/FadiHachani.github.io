@@ -48,7 +48,7 @@ export const projects: Project[] = [
   {
     featured: true,
     title: "Déligo",
-    kicker: "Transport Marketplace",
+    kicker: "Transport Marketplace — Backend",
     meta: ["CTO & Co-Founder", "2025–Present"],
     desc: "Backend for Tunisia's first technology-driven bulky-item moving marketplace. Drivers bid on client transport requests; deliveries are tracked live on a hexagonal spatial grid.",
     flow: ["REST", "WebSocket", "Redis presence", "Uber H3", "tracking"],
@@ -59,6 +59,21 @@ export const projects: Project[] = [
       "Secured the API with JWT RS256 (short access + long refresh tokens) and phone-based OTP auth, plus role guards and an approved-driver gate.",
     ],
     tags: ["NestJS", "TypeScript", "PostgreSQL", "Redis", "Socket.IO", "Uber H3", "TypeORM", "Flutter"],
+  },
+  {
+    featured: true,
+    title: "Déligo App",
+    kicker: "Cross-Platform Mobile Client",
+    meta: ["CTO & Co-Founder", "2025–Present"],
+    desc: "The iOS & Android app for Déligo — separate client and driver experiences over one codebase, with live map tracking and real-time bidding wired straight to the backend.",
+    flow: ["expo-router", "Redux", "socket.io", "live map", "i18n"],
+    points: [
+      "Built the React Native (Expo) app with expo-router file routing split across distinct (auth) / (client) / (driver) flows.",
+      "Implemented live driver tracking on react-native-maps, driven by a Socket.IO client streaming GPS from the backend.",
+      "Managed app state with Redux Toolkit and a typed Axios API layer that auto-attaches JWTs and handles refresh on 401.",
+      "Added multi-language support (i18next), OTP + Google sign-in, push notifications, and image-picker driver-document uploads.",
+    ],
+    tags: ["React Native", "Expo", "TypeScript", "expo-router", "Redux Toolkit", "react-native-maps", "Socket.IO", "i18next"],
   },
   {
     featured: true,
@@ -128,7 +143,7 @@ export const experience: Experience[] = [
     role: "CTO & Co-Founder",
     org: "Déligo",
     place: "Marsa, Tunisia",
-    text: "Leading engineering for Tunisia's first technology-driven bulky-item moving marketplace: real-time bidding, GPS tracking and spatial driver matching on a hexagonal grid.",
+    text: "Leading full-stack engineering for Tunisia's first technology-driven bulky-item moving marketplace — NestJS backend plus the React Native (Expo) mobile app: real-time bidding, live GPS tracking and spatial driver matching on a hexagonal grid.",
   },
   {
     when: "Jun 2026",
@@ -158,8 +173,9 @@ export type SkillGroup = { ix: string; nm: string; items: string[] };
 export const skills: SkillGroup[] = [
   { ix: "01", nm: "Languages", items: ["Python", "TypeScript", "JavaScript", "SQL", "Dart"] },
   { ix: "02", nm: "Backend & Real-time", items: ["NestJS", "FastAPI", "Node.js", "Flask", "Django", "Socket.IO", "REST", "TypeORM"] },
-  { ix: "03", nm: "AI / LLM", items: ["RAG pipelines", "LLM re-ranking", "Embeddings", "Semantic search", "Ollama", "Streamlit"] },
-  { ix: "04", nm: "Data & Infrastructure", items: ["PostgreSQL", "Redis", "Docker", "Uber H3", "JWT / OTP auth", "Linux"] },
+  { ix: "03", nm: "Frontend & Mobile", items: ["React.js", "React Native", "Expo", "expo-router", "Redux Toolkit", "i18next"] },
+  { ix: "04", nm: "AI / LLM", items: ["RAG pipelines", "LLM re-ranking", "Embeddings", "Semantic search", "Ollama", "Streamlit"] },
+  { ix: "05", nm: "Data & Infrastructure", items: ["PostgreSQL", "Redis", "Docker", "Uber H3", "JWT / OTP auth", "Linux"] },
 ];
 
 export const about = {
