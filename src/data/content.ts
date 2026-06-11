@@ -65,7 +65,7 @@ export const projects: Project[] = [
     title: "Déligo App",
     kicker: "Cross-Platform Mobile Client",
     meta: ["CTO & Co-Founder", "2025–Present"],
-    desc: "The iOS & Android app for Déligo — separate client and driver experiences over one codebase, with live map tracking and real-time bidding wired straight to the backend.",
+    desc: "The iOS & Android app for Déligo — separate client and driver experiences over one codebase, with live map tracking and bidding connected straight to the backend.",
     flow: ["expo-router", "Redux", "socket.io", "live map", "i18n"],
     points: [
       "Built the React Native (Expo) app with expo-router file routing split across distinct (auth) / (client) / (driver) flows.",
@@ -85,7 +85,7 @@ export const projects: Project[] = [
     points: [
       "Upgraded semantic search with LLM re-ranking — faster queries and measurably better medical relevance.",
       "Built zero-loss graph/table-to-Markdown conversion so structured clinical content survives the embedding pipeline intact.",
-      "Implemented LLM-driven summarisation pipelines that cut manual review workload for medical teams.",
+      "Implemented LLM-driven summarisation pipelines that cut hours of manual review.",
       "Shipped Streamlit demos that accelerated internal decisions and client-facing feature validation over a ~3,000-insight dataset.",
     ],
     tags: ["Python", "FastAPI", "sentence-transformers", "LLM / RAG", "Embeddings", "Streamlit"],
@@ -94,12 +94,12 @@ export const projects: Project[] = [
     title: "XWorld LTD",
     kicker: "AI Ecosystem Platform",
     meta: ["Software Engineer · Freelance", "Jun 2026"],
-    desc: "A one-week freelance build for XWorld LTD — a company building scalable AI infrastructure, enterprise automation, and the Nora AI OS. Wired the whole system together, front to back.",
-    flow: ["React UI", "Node.js API", "Python AI", "wiring"],
+    desc: "A one-week freelance sprint for XWorld LTD — a company building scalable AI infrastructure, enterprise automation, and the Nora AI OS.",
+    flow: ["React UI", "Node.js API", "Python AI"],
     points: [
-      "Wired the full system end-to-end — frontend, a Node.js backend, and a Python AI layer — within a one-week freelance engagement.",
-      "Built the Node.js API layer connecting the web platform to the AI services.",
-      "Implemented the Python AI integration powering the AI Suites / Nora AI OS.",
+      "Assembled the full platform — React frontend, Node.js API, and a Python AI layer — into one working system.",
+      "Built the Node.js layer that bridges the web platform and the AI services.",
+      "Implemented the Python integration powering the AI Suites / Nora AI OS.",
       "Translated the Figma designs (hero, nav, vision, team, CTA) into a responsive, dark-themed frontend.",
     ],
     tags: ["React.js", "Node.js", "Python", "AI integration", "REST APIs", "Figma-to-code"],
@@ -108,12 +108,12 @@ export const projects: Project[] = [
     title: "Medical QA Backend",
     kicker: "Master's Project · Symmetryk",
     meta: ["Software Engineer", "Nov 2024–Apr 2025"],
-    desc: "A medical question-answering backend giving teams faster, more reliable access to medical knowledge, built to enterprise-readiness standards.",
+    desc: "A question-answering service over a curated medical corpus, hardened for enterprise deployment.",
     flow: ["corpus", "retrieval", "RBAC", "async", "monitoring"],
     points: [
-      "Delivered a medical QA backend over a curated corpus of medical documents.",
-      "Added security layers — RBAC, IP control, secure REST APIs — to support compliance and enterprise readiness.",
-      "Introduced async processing and monitoring to improve system performance and reliability.",
+      "Delivered the QA engine from document ingestion through answer retrieval.",
+      "Added security layers — RBAC, IP control, secure REST APIs — to meet compliance requirements.",
+      "Introduced async processing and monitoring to improve performance and reliability.",
     ],
     tags: ["Python", "RAG", "LLMs", "REST APIs", "RBAC", "Async processing"],
   },
@@ -135,7 +135,7 @@ export const experience: Experience[] = [
     role: "Software Engineer",
     org: "Symmetryk AG",
     place: "remote · Switzerland",
-    text: "Building backend services for medical-insight tooling — semantic search, RAG pipelines and LLM summarisation over clinical field notes against a fixed ontology.",
+    text: "Owning Sym-AI's retrieval layer — embeddings, re-ranking and summarisation pipelines that turn thousands of clinical notes into fast, reliable answers.",
   },
   {
     when: "2025 — Present",
@@ -143,21 +143,21 @@ export const experience: Experience[] = [
     role: "CTO & Co-Founder",
     org: "Déligo",
     place: "Marsa, Tunisia",
-    text: "Leading full-stack engineering for Tunisia's first technology-driven bulky-item moving marketplace — NestJS backend plus the React Native (Expo) mobile app: real-time bidding, live GPS tracking and spatial driver matching on a hexagonal grid.",
+    text: "Leading engineering across the stack — the NestJS API and the Expo mobile client — for a marketplace where drivers bid on transport jobs and deliveries stream live to the customer's screen.",
   },
   {
     when: "Jun 2026",
     role: "Software Engineer (Freelance)",
     org: "XWorld LTD",
     place: "remote",
-    text: "One-week engagement wiring a full AI-platform system end-to-end — React frontend, Node.js API and a Python AI layer — for an AI-infrastructure & enterprise-automation company.",
+    text: "Solo freelance sprint: stood up the React frontend, Node.js API and Python AI layer for an enterprise-automation platform and its Nora AI OS.",
   },
   {
     when: "Nov 2024 — Apr 2025",
     role: "Software Engineer — Sym AI",
     org: "Symmetryk AG",
     place: "remote · Switzerland (Master's project)",
-    text: "Delivered a medical QA backend with RBAC, IP control and secure REST APIs, plus async processing and monitoring for enterprise readiness.",
+    text: "Built the first iteration of the medical QA system as a Master's project — the security, async and monitoring work that took it from prototype to client-ready.",
   },
   {
     when: "Sep 2023 — Nov 2024",
@@ -179,15 +179,15 @@ export const skills: SkillGroup[] = [
 ];
 
 export const about = {
-  lead: "I like to understand systems end-to-end — from the architecture diagram down to the bytes on the wire.",
+  lead: "Most engineers pick a layer and live there. I'd rather own the whole path — schema, service, socket, screen.",
   body: [
-    "Most of my work lives on the backend: real-time services, spatial matching, and AI/LLM pipelines that have to behave under real production load. I care about clear state machines, observable systems, and APIs that are hard to misuse.",
+    "Most of my work lives on the backend: live tracking, spatial matching, and AI/LLM pipelines that have to behave under production load. I care about clear state machines, observable systems, and APIs that are hard to misuse.",
     "Right now I split my time between shipping medical-insight tooling for a Swiss company and building Déligo, a logistics marketplace, from the ground up.",
   ],
   facts: [
     { k: "based", v: "Marsa, Tunisia", ac: true },
     { k: "focus", v: "Backends · AI" },
     { k: "languages", v: "EN · FR · AR" },
-    { k: "availability", v: "open to talk", ac: true },
+    { k: "availability", v: "taking on new work", ac: true },
   ],
 };
