@@ -135,7 +135,7 @@
     var raf = null, lastT = 0, visible = true;
     function tick(t) {
       if (visible && t - lastT > 48) {   // ~20fps
-        timePhase += 0.004;
+        timePhase += 0.0016;
         paint();
         lastT = t;
       }
