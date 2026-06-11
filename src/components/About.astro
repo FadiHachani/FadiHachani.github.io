@@ -1,41 +1,31 @@
 ---
 import { about } from "../data/content";
 import SectionHead from "./SectionHead.astro";
-
-const leadParts = about.lead.split("end-to-end");
 ---
 
 <section class="section" id="about">
   <div class="wrap">
-    <SectionHead num="04" label="About" title="The short version" />
+    <SectionHead no="04" label="About" hint="The short version" />
     <div class="about-grid">
       <div>
-        <p class="about-lead reveal">
-          {
-            leadParts.map((part, i) =>
-              i < leadParts.length - 1 ? (
-                <>{part}<span class="hl">end-to-end</span></>
-              ) : (
-                <>{part}</>
-              )
-            )
-          }
+        <p class="about-lead reveal" style="--d:60ms">
+          I like to understand systems <em>end-to-end</em> — from the architecture
+          diagram down to the bytes on the wire.
         </p>
-        <div class="about-body reveal" style="--d:80ms">
+        <div class="about-body reveal" style="--d:140ms">
           {about.body.map((p) => <p>{p}</p>)}
         </div>
       </div>
-      <div class="reveal" style="--d:140ms">
-        <div class="fact-card">
-          {
-            about.facts.map((f) => (
-              <div class="fact-row">
-                <span class="fact-k">{f.k}</span>
-                <span class="fact-v">{f.ac ? <span class="ac">{f.v}</span> : f.v}</span>
-              </div>
-            ))
-          }
-        </div>
+      <div class="facts reveal" style="--d:200ms">
+        <div class="facts-caption">Particulars</div>
+        {
+          about.facts.map((f) => (
+            <div class="fact-row">
+              <span class="k">{f.k}</span>
+              <span class={"v" + (f.ac ? " ac" : "")}>{f.v}</span>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>

@@ -1,22 +1,20 @@
 ---
-import { profile, navItems } from "../data/content";
+import { navItems } from "../data/content";
 import { icons } from "./icons";
 ---
 
 <nav class="nav">
   <div class="wrap nav-inner">
-    <a href="#top" class="brand" aria-label="Home">
-      {profile.handle}<span class="dot">.</span>dev
-    </a>
+    <a href="#top" class="brand">Fadi <em>Hachani</em><span class="stop">.</span></a>
     <div class="nav-links">
       {
         navItems.map((n) => (
           <a href={"#" + n.id} class="nav-link" data-spy={n.id}>
-            <span class="hash">#</span>{n.label}
+            <span class="ix">{n.n}</span>{n.label}
           </a>
         ))
       }
-      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme" style="margin-left:8px">
+      <button class="theme-btn" data-theme-toggle aria-label="Toggle theme">
         <span data-icon-sun set:html={icons.sun} style="display:contents" />
         <span data-icon-moon set:html={icons.moon} style="display:contents" />
       </button>

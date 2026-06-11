@@ -1,17 +1,13 @@
 ---
 interface Props {
-  num: string;
+  no: string;
   label: string;
-  title: string;
-  sub?: string;
+  hint?: string;
 }
-const { num, label, title, sub } = Astro.props;
+const { no, label, hint } = Astro.props;
 ---
 
-<div>
-  <span class="sec-label reveal">
-    <span class="num">{num}.</span> {label}
-  </span>
-  <h2 class="sec-title reveal" style="--d:60ms">{title}</h2>
-  {sub && <p class="sec-sub reveal" style="--d:120ms">{sub}</p>}
+<div class="sec-rule reveal">
+  <span class="sec-no"><b>No. {no}</b> — {label}</span>
+  {hint && <span class="sec-hint">{hint}</span>}
 </div>

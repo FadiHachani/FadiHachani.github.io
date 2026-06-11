@@ -5,27 +5,19 @@ import SectionHead from "./SectionHead.astro";
 
 <section class="section" id="experience">
   <div class="wrap">
-    <SectionHead
-      num="02"
-      label="Experience"
-      title="Where I've shipped"
-      sub="Roles in parallel — building products and shipping backend & AI systems."
-    />
-    <div class="timeline">
+    <SectionHead no="02" label="Experience" hint="Roles in parallel — backend, AI & product" />
+    <h2 class="sec-title reveal" style="--d:80ms">Where I've <em>shipped.</em></h2>
+    <div class="ledger">
       {
         experience.map((x, i) => (
-          <div class="tl-item reveal" style={`--d:${i * 80}ms`}>
-            <div class="tl-when">
-              {x.when}
-              {x.now && (
-                <div class="now"><span class="live-dot"></span>current</div>
-              )}
-            </div>
+          <div class="ledger-row reveal" style={`--d:${i * 60}ms`}>
+            <span class="ledger-when">{x.when}</span>
             <div>
-              <h3 class="tl-role">{x.role}</h3>
-              <p class="tl-org">@ {x.org} <span class="place">· {x.place}</span></p>
-              <p class="tl-text">{x.text}</p>
+              <h3 class="ledger-role">{x.role} <em>@ {x.org}</em></h3>
+              <p class="ledger-org">{x.place}</p>
+              <p class="ledger-text">{x.text}</p>
             </div>
+            {x.now && <span class="ledger-now"><i></i>Current</span>}
           </div>
         ))
       }

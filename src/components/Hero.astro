@@ -1,61 +1,33 @@
 ---
-import { profile, status } from "../data/content";
 import { icons } from "./icons";
-
-const [first, ...restName] = profile.name.split(" ");
-const last = restName.join(" ");
 ---
 
 <header class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="hero-cmd">
-        <span class="prompt">$</span>
-        <span data-typewriter="whoami">whoami</span><span class="cur"></span>
-      </div>
-      <h1 class="hero-name">
-        <span class="ln">{first}</span>
-        <span class="ln accenty">{last}</span>
-      </h1>
-      <p class="hero-role">
-        <b>{profile.role}</b> &nbsp;·&nbsp; backend, real-time &amp; AI systems
-      </p>
-      <p class="hero-bio">
-        <span class="hl">{profile.bio.lead}</span> {profile.bio.rest}
-      </p>
-      <div class="hero-cta">
-        <a href="#work" class="btn btn-primary">
-          View my work <span class="arr" style="display:contents" set:html={icons.arrow} />
-        </a>
-        <a href="#contact" class="btn">
-          <span style="display:contents" set:html={icons.mail} /> Get in touch
-        </a>
-        <a href={profile.links.linkedin} target="_blank" rel="noreferrer" class="btn">
-          <span style="display:contents" set:html={icons.linkedin} /> LinkedIn
-        </a>
-      </div>
+  <canvas id="flowCanvas"></canvas>
+  <div class="hero-fade"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow reveal">Software Engineer</div>
+    <h1 class="hero-name">
+      <span class="ln">Fadi</span>
+      <span class="ln"><em>Hachani</em><span class="stop">.</span></span>
+    </h1>
+    <p class="hero-tag reveal" style="--d:520ms">
+      I build <b>real-time backends</b> and <b>AI systems</b> — and I like to understand
+      them <em>end-to-end</em>, from the architecture diagram down to the bytes on the wire.
+    </p>
+    <div class="hero-cta reveal" style="--d:650ms">
+      <a href="#work" class="btn btn-primary">
+        Selected work <span style="display:contents" set:html={icons.arrow} />
+      </a>
+      <a href="#contact" class="btn">Get in touch</a>
     </div>
-
-    <div class="reveal" style="--d:250ms">
-      <div class="status-panel">
-        <div class="sp-bar">
-          <span class="sp-dots"><i></i><i></i><i></i></span>
-          <span class="sp-title">~/fadi/status.json</span>
-        </div>
-        <div class="sp-body">
-          {
-            status.map((s) => (
-              <div class="sp-row">
-                <span class="sp-key">{s.k}</span>
-                <span class="sp-val">
-                  {s.live && <span class="live-dot" />}
-                  {s.ok ? <span class="ok">{s.v}</span> : s.v}
-                </span>
-              </div>
-            ))
-          }
-        </div>
-      </div>
+  </div>
+  <div class="wrap">
+    <div class="hero-strip reveal" style="--d:800ms">
+      <span class="item"><span class="dot"></span>Open to talk</span>
+      <span class="item"><span class="k">Now —</span> Software Engineer @ Symmetryk AG</span>
+      <span class="item"><span class="k">&amp;</span> CTO @ Déligo</span>
+      <span class="item"><span class="k">From</span> Marsa, Tunisia · 36.88°N 10.32°E</span>
     </div>
   </div>
 </header>

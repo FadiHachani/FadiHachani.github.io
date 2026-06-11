@@ -5,23 +5,19 @@ import SectionHead from "./SectionHead.astro";
 
 <section class="section" id="skills">
   <div class="wrap">
-    <SectionHead
-      num="03"
-      label="Skills"
-      title="The toolbox"
-      sub="What I reach for, grouped by where it lives in the stack."
-    />
-    <div class="skills-grid">
+    <SectionHead no="03" label="Index of Skills" hint="Grouped by where it lives in the stack" />
+    <h2 class="sec-title reveal" style="--d:80ms">The <em>toolbox.</em></h2>
+    <div class="index-grid">
       {
         skills.map((g, i) => (
-          <div class="skill-card reveal" style={`--d:${(i % 2) * 80}ms`}>
-            <div class="skill-head">
-              <span class="ix">{g.ix}</span>
+          <div class="index-col reveal" style={`--d:${(i % 4) * 60}ms`}>
+            <div class="index-head">
               <span class="nm">{g.nm}</span>
+              <span class="ix">{g.ix}</span>
             </div>
-            <div class="skill-items">
-              {g.items.map((it) => <span class="tag">{it}</span>)}
-            </div>
+            <ul class="index-items">
+              {g.items.map((it) => <li>{it}</li>)}
+            </ul>
           </div>
         ))
       }

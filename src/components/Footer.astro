@@ -6,13 +6,15 @@ const year = 2026;
 ---
 
 <section class="contact" id="contact">
-  <div class="wrap contact-inner">
-    <div class="contact-kicker reveal">$ ./say-hello.sh</div>
-    <h2 class="contact-title reveal" style="--d:60ms">Let's build something solid.</h2>
-    <div class="reveal" style="--d:120ms">
+  <div class="wrap">
+    <div class="contact-eyebrow reveal">Correspondence</div>
+    <h2 class="contact-title reveal" style="--d:60ms">
+      Let's build something <em>solid.</em>
+    </h2>
+    <div class="reveal" style="--d:130ms">
       <a href={`mailto:${profile.email}`} class="contact-mail">{profile.email}</a>
     </div>
-    <div class="contact-links reveal" style="--d:160ms">
+    <div class="contact-links reveal" style="--d:180ms">
       <a href={profile.links.linkedin} target="_blank" rel="noreferrer" class="btn">
         <span style="display:contents" set:html={icons.linkedin} /> LinkedIn
       </a>
@@ -24,9 +26,10 @@ const year = 2026;
       </a>
     </div>
 
-    <div class="footer">
-      <span>© {year} {profile.name}. Built from the wire up.</span>
-      <span>{profile.location} · {profile.role}</span>
+    <div class="colophon">
+      <span>© {year} {profile.name}</span>
+      <span>Set in Newsreader &amp; IBM Plex Mono</span>
+      <span><span class="ac">●</span> {profile.location}</span>
     </div>
   </div>
 </section>

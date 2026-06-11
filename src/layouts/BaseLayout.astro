@@ -14,7 +14,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="paper">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,31 +30,27 @@ const {
     <script is:inline>
       (function () {
         try {
-          const saved = localStorage.getItem("fh-theme");
-          if (saved === "light" || saved === "dark") {
+          const saved = localStorage.getItem("fh-theme-v2");
+          if (saved === "paper" || saved === "night") {
             document.documentElement.setAttribute("data-theme", saved);
           }
         } catch (e) {}
       })();
     </script>
 
-    <!-- Fonts -->
+    <!-- Fonts: Newsreader (serif display) + IBM Plex Mono (labels) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <div class="page-bg">
-      <canvas id="hexCanvas"></canvas>
-    </div>
-
     <slot />
 
-    <!-- Hex grid background -->
-    <script is:inline src="/hexgrid.js"></script>
+    <!-- Flow-field hero background (waits for the canvas to mount) -->
+    <script is:inline src="/flowfield.js" defer></script>
 
     <!-- Interactions: motion gate, theme toggle, scroll-spy, reveal, nav scrolled -->
     <script is:inline>
@@ -62,7 +58,6 @@ const {
         var doc = document.documentElement;
 
         // 1) Enable entrance animations only if the timeline actually advances.
-        //    Resting state is visible by default, so content never gets stuck.
         if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           requestAnimationFrame(function (t1) {
             requestAnimationFrame(function (t2) {
@@ -79,29 +74,30 @@ const {
           }
         }, 2600);
 
-        // 2) Theme toggle (delegated)
+        // 2) Theme toggle (paper <-> night)
         function applyTheme(theme) {
           doc.setAttribute("data-theme", theme);
-          try { localStorage.setItem("fh-theme", theme); } catch (e) {}
-          if (window.__refreshHexColors) window.__refreshHexColors();
+          try { localStorage.setItem("fh-theme-v2", theme); } catch (e) {}
+          if (window.__refreshFlowColors) window.__refreshFlowColors();
           updateToggleIcons(theme);
         }
         function updateToggleIcons(theme) {
-          var isDark = theme !== "light";
+          // paper (light) shows the moon (switch to night); night shows the sun.
+          var isPaper = theme !== "night";
           document.querySelectorAll("[data-icon-sun]").forEach(function (el) {
-            el.style.display = isDark ? "contents" : "none";
+            el.style.display = isPaper ? "none" : "contents";
           });
           document.querySelectorAll("[data-icon-moon]").forEach(function (el) {
-            el.style.display = isDark ? "none" : "contents";
+            el.style.display = isPaper ? "contents" : "none";
           });
         }
         document.addEventListener("click", function (e) {
           var btn = e.target.closest && e.target.closest("[data-theme-toggle]");
           if (!btn) return;
-          var current = doc.getAttribute("data-theme") || "dark";
-          applyTheme(current === "dark" ? "light" : "dark");
+          var current = doc.getAttribute("data-theme") || "paper";
+          applyTheme(current === "paper" ? "night" : "paper");
         });
-        updateToggleIcons(doc.getAttribute("data-theme") || "dark");
+        updateToggleIcons(doc.getAttribute("data-theme") || "paper");
 
         // 3) Nav scrolled state
         var nav = document.querySelector(".nav");
@@ -120,7 +116,7 @@ const {
                 if (en.isIntersecting) { en.target.classList.add("in"); ro.unobserve(en.target); }
               });
             },
-            { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+            { threshold: 0.1, rootMargin: "0px 0px -6% 0px" }
           );
           reveals.forEach(function (el) { ro.observe(el); });
         } else {
@@ -147,23 +143,6 @@ const {
             { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
           );
           sections.forEach(function (s) { so.observe(s); });
-        }
-
-        // 6) Hero typewriter for "$ whoami"
-        var tw = document.querySelector("[data-typewriter]");
-        if (tw) {
-          var text = tw.getAttribute("data-typewriter") || "";
-          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            tw.textContent = text;
-          } else {
-            var i = 0;
-            tw.textContent = "";
-            var id = setInterval(function () {
-              i++;
-              tw.textContent = text.slice(0, i);
-              if (i >= text.length) clearInterval(id);
-            }, 95);
-          }
         }
       })();
     </script>
