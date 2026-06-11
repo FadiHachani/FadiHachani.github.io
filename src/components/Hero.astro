@@ -1,0 +1,61 @@
+---
+import { profile, status } from "../data/content";
+import { icons } from "./icons";
+
+const [first, ...restName] = profile.name.split(" ");
+const last = restName.join(" ");
+---
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-cmd">
+        <span class="prompt">$</span>
+        <span data-typewriter="whoami">whoami</span><span class="cur"></span>
+      </div>
+      <h1 class="hero-name">
+        <span class="ln">{first}</span>
+        <span class="ln accenty">{last}</span>
+      </h1>
+      <p class="hero-role">
+        <b>{profile.role}</b> &nbsp;·&nbsp; backend, real-time &amp; AI systems
+      </p>
+      <p class="hero-bio">
+        <span class="hl">{profile.bio.lead}</span> {profile.bio.rest}
+      </p>
+      <div class="hero-cta">
+        <a href="#work" class="btn btn-primary">
+          View my work <span class="arr" style="display:contents" set:html={icons.arrow} />
+        </a>
+        <a href="#contact" class="btn">
+          <span style="display:contents" set:html={icons.mail} /> Get in touch
+        </a>
+        <a href={profile.links.linkedin} target="_blank" rel="noreferrer" class="btn">
+          <span style="display:contents" set:html={icons.linkedin} /> LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal" style="--d:250ms">
+      <div class="status-panel">
+        <div class="sp-bar">
+          <span class="sp-dots"><i></i><i></i><i></i></span>
+          <span class="sp-title">~/fadi/status.json</span>
+        </div>
+        <div class="sp-body">
+          {
+            status.map((s) => (
+              <div class="sp-row">
+                <span class="sp-key">{s.k}</span>
+                <span class="sp-val">
+                  {s.live && <span class="live-dot" />}
+                  {s.ok ? <span class="ok">{s.v}</span> : s.v}
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

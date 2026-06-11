@@ -1,0 +1,171 @@
+---
+import "../styles/global.css";
+import { profile } from "../data/content";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${profile.name} — ${profile.role}`,
+  description = profile.bio.lead + " " + profile.bio.rest,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- Apply saved theme before paint (no flash) -->
+    <script is:inline>
+      (function () {
+        try {
+          const saved = localStorage.getItem("fh-theme");
+          if (saved === "light" || saved === "dark") {
+            document.documentElement.setAttribute("data-theme", saved);
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page-bg">
+      <canvas id="hexCanvas"></canvas>
+    </div>
+
+    <slot />
+
+    <!-- Hex grid background -->
+    <script is:inline src="/hexgrid.js"></script>
+
+    <!-- Interactions: motion gate, theme toggle, scroll-spy, reveal, nav scrolled -->
+    <script is:inline>
+      (function () {
+        var doc = document.documentElement;
+
+        // 1) Enable entrance animations only if the timeline actually advances.
+        //    Resting state is visible by default, so content never gets stuck.
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          requestAnimationFrame(function (t1) {
+            requestAnimationFrame(function (t2) {
+              if (t2 - t1 > 0.05) doc.classList.add("motion");
+            });
+          });
+        }
+
+        // Safety net: if hero name never animated in, force everything visible.
+        setTimeout(function () {
+          var ln = document.querySelector(".hero-name .ln");
+          if (ln && parseFloat(getComputedStyle(ln).opacity) < 0.05) {
+            doc.classList.add("no-anim");
+          }
+        }, 2600);
+
+        // 2) Theme toggle (delegated)
+        function applyTheme(theme) {
+          doc.setAttribute("data-theme", theme);
+          try { localStorage.setItem("fh-theme", theme); } catch (e) {}
+          if (window.__refreshHexColors) window.__refreshHexColors();
+          updateToggleIcons(theme);
+        }
+        function updateToggleIcons(theme) {
+          var isDark = theme !== "light";
+          document.querySelectorAll("[data-icon-sun]").forEach(function (el) {
+            el.style.display = isDark ? "contents" : "none";
+          });
+          document.querySelectorAll("[data-icon-moon]").forEach(function (el) {
+            el.style.display = isDark ? "none" : "contents";
+          });
+        }
+        document.addEventListener("click", function (e) {
+          var btn = e.target.closest && e.target.closest("[data-theme-toggle]");
+          if (!btn) return;
+          var current = doc.getAttribute("data-theme") || "dark";
+          applyTheme(current === "dark" ? "light" : "dark");
+        });
+        updateToggleIcons(doc.getAttribute("data-theme") || "dark");
+
+        // 3) Nav scrolled state
+        var nav = document.querySelector(".nav");
+        function onScroll() {
+          if (nav) nav.classList.toggle("scrolled", window.scrollY > 24);
+        }
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+
+        // 4) Reveal-on-scroll
+        var reveals = document.querySelectorAll(".reveal");
+        if ("IntersectionObserver" in window && reveals.length) {
+          var ro = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (en) {
+                if (en.isIntersecting) { en.target.classList.add("in"); ro.unobserve(en.target); }
+              });
+            },
+            { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+          );
+          reveals.forEach(function (el) { ro.observe(el); });
+        } else {
+          reveals.forEach(function (el) { el.classList.add("in"); });
+        }
+
+        // 5) Scroll-spy for nav links
+        var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-link[data-spy]"));
+        var ids = navLinks.map(function (a) { return a.getAttribute("data-spy"); });
+        var sections = ids
+          .map(function (id) { return document.getElementById(id); })
+          .filter(Boolean);
+        if ("IntersectionObserver" in window && sections.length) {
+          var so = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (en) {
+                if (en.isIntersecting) {
+                  navLinks.forEach(function (a) {
+                    a.classList.toggle("active", a.getAttribute("data-spy") === en.target.id);
+                  });
+                }
+              });
+            },
+            { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+          );
+          sections.forEach(function (s) { so.observe(s); });
+        }
+
+        // 6) Hero typewriter for "$ whoami"
+        var tw = document.querySelector("[data-typewriter]");
+        if (tw) {
+          var text = tw.getAttribute("data-typewriter") || "";
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            tw.textContent = text;
+          } else {
+            var i = 0;
+            tw.textContent = "";
+            var id = setInterval(function () {
+              i++;
+              tw.textContent = text.slice(0, i);
+              if (i >= text.length) clearInterval(id);
+            }, 95);
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

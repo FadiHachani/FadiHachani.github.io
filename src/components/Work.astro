@@ -1,0 +1,63 @@
+---
+import { projects } from "../data/content";
+import SectionHead from "./SectionHead.astro";
+---
+
+<section class="section" id="work">
+  <div class="wrap">
+    <SectionHead
+      num="01"
+      label="Selected Work"
+      title="Things I've built"
+      sub="Production systems and AI tooling — described by what they actually run on."
+    />
+    <div class="work-list">
+      {
+        projects.map((p, idx) => (
+          <div class="proj reveal" style={`--d:${idx * 90}ms`}>
+            <div class="proj-inner">
+              <div class="proj-index">{String(idx + 1).padStart(2, "0")}</div>
+              <div>
+                <div class="proj-head">
+                  <div>
+                    <h3 class="proj-title">
+                      {p.title} <span class="kick">— {p.kicker}</span>
+                    </h3>
+                    <p class="proj-meta">
+                      {p.meta.map((m, i) => (
+                        <span>{i > 0 && <span class="sep">·</span>}{m}</span>
+                      ))}
+                    </p>
+                  </div>
+                  {p.featured && <span class="badge">Featured</span>}
+                </div>
+
+                <p class="proj-desc">{p.desc}</p>
+
+                <div class="flow">
+                  {p.flow.map((f, i) => (
+                    <>
+                      {i > 0 && <span class="flow-arr">→</span>}
+                      <span class="flow-node">{f}</span>
+                    </>
+                  ))}
+                </div>
+
+                <ul class="proj-points">
+                  {p.points.map((pt) => (
+                    <li><span class="mk">▸</span><span>{pt}</span></li>
+                  ))}
+                </ul>
+
+                <div class="proj-divider"></div>
+                <div class="tags">
+                  {p.tags.map((t) => <span class="tag">{t}</span>)}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

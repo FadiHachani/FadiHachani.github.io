@@ -1,0 +1,30 @@
+---
+import { skills } from "../data/content";
+import SectionHead from "./SectionHead.astro";
+---
+
+<section class="section" id="skills">
+  <div class="wrap">
+    <SectionHead
+      num="03"
+      label="Skills"
+      title="The toolbox"
+      sub="What I reach for, grouped by where it lives in the stack."
+    />
+    <div class="skills-grid">
+      {
+        skills.map((g, i) => (
+          <div class="skill-card reveal" style={`--d:${(i % 2) * 80}ms`}>
+            <div class="skill-head">
+              <span class="ix">{g.ix}</span>
+              <span class="nm">{g.nm}</span>
+            </div>
+            <div class="skill-items">
+              {g.items.map((it) => <span class="tag">{it}</span>)}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

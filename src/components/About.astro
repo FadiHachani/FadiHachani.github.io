@@ -1,0 +1,42 @@
+---
+import { about } from "../data/content";
+import SectionHead from "./SectionHead.astro";
+
+const leadParts = about.lead.split("end-to-end");
+---
+
+<section class="section" id="about">
+  <div class="wrap">
+    <SectionHead num="04" label="About" title="The short version" />
+    <div class="about-grid">
+      <div>
+        <p class="about-lead reveal">
+          {
+            leadParts.map((part, i) =>
+              i < leadParts.length - 1 ? (
+                <>{part}<span class="hl">end-to-end</span></>
+              ) : (
+                <>{part}</>
+              )
+            )
+          }
+        </p>
+        <div class="about-body reveal" style="--d:80ms">
+          {about.body.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+      <div class="reveal" style="--d:140ms">
+        <div class="fact-card">
+          {
+            about.facts.map((f) => (
+              <div class="fact-row">
+                <span class="fact-k">{f.k}</span>
+                <span class="fact-v">{f.ac ? <span class="ac">{f.v}</span> : f.v}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
