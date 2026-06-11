@@ -49,16 +49,23 @@
        enter as x*FREQ and y*FREQ, so we sample noise on a fixed lattice ONCE
        per resize, then per-frame the drift (timePhase) is just an integer
        offset + fractional blend across two cached columns. */
-    var NX = 0, NY = 0, field = null;     // field[gx*NY + gy] in [0,1]
+    var NX = 0, NY = 0, PERX = 0, field = null;   // field[gx*NY + gy] in [0,1]
     var GSTEP = 6;                        // grid resolution in screen px
 
     function buildField() {
-      // pad generously so streamlines that wander never read out of bounds
-      NX = Math.ceil((W + 80) / GSTEP) + 2;
+      // Columns must cover the visible width PLUS a full drift period so the
+      // animation can scroll the phase forever and wrap seamlessly (toroidal
+      // in X) instead of running off the edge and clamping to one column —
+      // which is what collapsed the field into straight diagonal lines.
+      var visCols = Math.ceil((W + 80) / GSTEP) + 2;
+      PERX = visCols * 3;                 // periodic span = 3× the viewport
+      NX = PERX + 2;                       // +2 guard cols (we still wrap before reading)
       NY = Math.ceil((H + 80) / GSTEP) + 2;
       field = new Float32Array(NX * NY);
       for (var gx = 0; gx < NX; gx++) {
-        var nx = (gx * GSTEP - 40) * FREQ;
+        // wrap the noise X-coordinate so column PERX matches column 0 → seamless loop
+        var wx = gx % PERX;
+        var nx = (wx * GSTEP - 40) * FREQ;
         for (var gy = 0; gy < NY; gy++) {
           var ny = (gy * GSTEP - 40) * FREQ;
           field[gx * NY + gy] = noise(nx, ny);
@@ -68,16 +75,17 @@
 
     // sampled value at screen (x,y) for the current timePhase, via the lattice
     function fieldAt(x, y) {
-      // timePhase shifts the noise's x-input; convert to a grid-column offset
+      // timePhase shifts the column offset; wrap modulo PERX so it never clamps
       var fx = (x + 40) / GSTEP + (timePhase / FREQ) / GSTEP;
+      fx = fx % PERX; if (fx < 0) fx += PERX;
       var fy = (y + 40) / GSTEP;
       var gx = fx | 0, gy = fy | 0;
-      if (gx < 0) gx = 0; else if (gx >= NX - 1) gx = NX - 2;
       if (gy < 0) gy = 0; else if (gy >= NY - 1) gy = NY - 2;
+      var gx1 = (gx + 1) % PERX;            // wrap the neighbour column too
       var tx = fx - gx, ty = fy - gy;
-      var i00 = gx * NY + gy;
-      var v00 = field[i00], v10 = field[i00 + NY];
-      var v01 = field[i00 + 1], v11 = field[i00 + NY + 1];
+      var a0 = gx * NY + gy, a1 = gx1 * NY + gy;
+      var v00 = field[a0], v10 = field[a1];
+      var v01 = field[a0 + 1], v11 = field[a1 + 1];
       return (v00 * (1 - tx) + v10 * tx) * (1 - ty) +
              (v01 * (1 - tx) + v11 * tx) * ty;
     }
