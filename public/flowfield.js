@@ -1,11 +1,13 @@
 /* Flow-field background for the hero — the v2 brand motif.
-   Streamlines drift slowly; ink + occasional vermilion threads. */
+   Streamlines genuinely re-flow (the original v2 motion), kept smooth by
+   precomputing the value-noise field into a grid so per-frame work is just
+   cheap lookups instead of thousands of Math.sin() calls. */
 (function () {
   var tries = 0;
   function init() {
     var canvas = document.getElementById("flowCanvas");
     if (!canvas) {
-      // React mounts the canvas after Babel transpiles — retry briefly
+      // React/Astro may mount the canvas a touch late — retry briefly
       if (tries++ < 100) setTimeout(init, 100);
       return;
     }
@@ -41,8 +43,47 @@
 
     var FREQ = 0.0036, TURN = Math.PI * 2.2;
     var timePhase = 0;
+
+    /* --- precomputed noise field ---
+       The expensive part is noise(x*FREQ + timePhase, y*FREQ). x and y only
+       enter as x*FREQ and y*FREQ, so we sample noise on a fixed lattice ONCE
+       per resize, then per-frame the drift (timePhase) is just an integer
+       offset + fractional blend across two cached columns. */
+    var NX = 0, NY = 0, field = null;     // field[gx*NY + gy] in [0,1]
+    var GSTEP = 6;                        // grid resolution in screen px
+
+    function buildField() {
+      // pad generously so streamlines that wander never read out of bounds
+      NX = Math.ceil((W + 80) / GSTEP) + 2;
+      NY = Math.ceil((H + 80) / GSTEP) + 2;
+      field = new Float32Array(NX * NY);
+      for (var gx = 0; gx < NX; gx++) {
+        var nx = (gx * GSTEP - 40) * FREQ;
+        for (var gy = 0; gy < NY; gy++) {
+          var ny = (gy * GSTEP - 40) * FREQ;
+          field[gx * NY + gy] = noise(nx, ny);
+        }
+      }
+    }
+
+    // sampled value at screen (x,y) for the current timePhase, via the lattice
+    function fieldAt(x, y) {
+      // timePhase shifts the noise's x-input; convert to a grid-column offset
+      var fx = (x + 40) / GSTEP + (timePhase / FREQ) / GSTEP;
+      var fy = (y + 40) / GSTEP;
+      var gx = fx | 0, gy = fy | 0;
+      if (gx < 0) gx = 0; else if (gx >= NX - 1) gx = NX - 2;
+      if (gy < 0) gy = 0; else if (gy >= NY - 1) gy = NY - 2;
+      var tx = fx - gx, ty = fy - gy;
+      var i00 = gx * NY + gy;
+      var v00 = field[i00], v10 = field[i00 + NY];
+      var v01 = field[i00 + 1], v11 = field[i00 + NY + 1];
+      return (v00 * (1 - tx) + v10 * tx) * (1 - ty) +
+             (v01 * (1 - tx) + v11 * tx) * ty;
+    }
+
     function angleAt(x, y) {
-      return noise(x * FREQ + timePhase, y * FREQ) * TURN + x * 0.0005;
+      return fieldAt(x, y) * TURN + x * 0.0005;
     }
 
     function resize() {
@@ -51,6 +92,7 @@
       canvas.width = W * DPR;
       canvas.height = H * DPR;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      buildField();
     }
 
     function streamline(sx, sy, steps, color, alpha, width) {
@@ -88,11 +130,12 @@
       }
     }
 
-    /* very slow drift: re-render with shifting phase a few times/sec */
-    var raf = null, lastT = 0;
+    /* continuous re-flow — the original v2 motion, now cheap thanks to the
+       cached field. ~20fps is smooth for this slow drift. */
+    var raf = null, lastT = 0, visible = true;
     function tick(t) {
-      if (t - lastT > 90) {       // ~11fps is plenty for slow drift
-        timePhase += 0.0035;
+      if (visible && t - lastT > 48) {   // ~20fps
+        timePhase += 0.004;
         paint();
         lastT = t;
       }
@@ -102,8 +145,8 @@
     function start() {
       readColors();
       resize();
-      paint();                     // static frame immediately
-      if (reduce) return;
+      paint();                     // first frame immediately
+      if (reduce) return;          // static for reduced-motion users
       if (raf) cancelAnimationFrame(raf);
       raf = requestAnimationFrame(tick);
     }
@@ -113,6 +156,14 @@
       clearTimeout(rt);
       rt = setTimeout(function () { resize(); paint(); }, 150);
     });
+
+    // Stop animating while the hero is scrolled out of view.
+    if ("IntersectionObserver" in window) {
+      var vis = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { visible = e.isIntersecting; });
+      }, { threshold: 0 });
+      vis.observe(canvas.parentElement || canvas);
+    }
 
     window.__refreshFlowColors = function () { readColors(); paint(); };
 
