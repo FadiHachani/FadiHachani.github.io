@@ -13,7 +13,7 @@ export const profile = {
     github: "https://github.com/FadiHachani",
   },
   bio: {
-    lead: "Generalist software engineer who likes to understand systems end-to-end —",
+    lead: "Generalist software engineer who likes to understand systems end-to-end  ",
     rest: "from architecture down to the wire. Python & TypeScript, LLM/RAG pipelines, and real-time backends.",
   },
 };
@@ -49,14 +49,14 @@ export const projects: Project[] = [
   {
     featured: true,
     title: "Déligo",
-    kicker: "Transport Marketplace — Backend",
+    kicker: "Transport Marketplace   Backend",
     meta: ["CTO & Co-Founder", "2025–Present"],
     desc: "Backend for Tunisia's first technology-driven bulky-item moving marketplace. Drivers bid on client transport requests; deliveries are tracked live on a hexagonal spatial grid.",
     flow: ["REST", "WebSocket", "Redis presence", "Uber H3", "tracking"],
     points: [
       "Designed a REST + WebSocket backend in NestJS with a strict status state-machine across requests → bids → bookings → tracking → ratings.",
       "Built real-time GPS tracking over Socket.IO with Redis-backed driver presence and live location streaming to clients.",
-      "Implemented spatial driver matching using Uber's H3 hexagonal grid (k-ring queries, heatmaps) — no PostGIS needed.",
+      "Implemented spatial driver matching using Uber's H3 hexagonal grid (k-ring queries, heatmaps)   no PostGIS needed.",
       "Secured the API with JWT RS256 (short access + long refresh tokens) and phone-based OTP auth, plus role guards and an approved-driver gate.",
     ],
     tags: [
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     title: "Déligo App",
     kicker: "Cross-Platform Mobile Client",
     meta: ["CTO & Co-Founder", "2025–Present"],
-    desc: "The iOS & Android app for Déligo — separate client and driver experiences over one codebase, with live map tracking and bidding connected straight to the backend.",
+    desc: "The iOS & Android app for Déligo   separate client and driver experiences over one codebase, with live map tracking and bidding connected straight to the backend.",
     flow: ["expo-router", "Redux", "socket.io", "live map", "i18n"],
     points: [
       "Built the React Native (Expo) app with expo-router file routing split across distinct (auth) / (client) / (driver) flows.",
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     desc: "Backend services that help medical teams extract insight from large volumes of MSL/KOL field notes, tagged against a fixed clinical ontology.",
     flow: ["ingest", "graph→MD", "embeddings", "LLM re-rank", "summarise"],
     points: [
-      "Upgraded semantic search with LLM re-ranking — faster queries and measurably better medical relevance.",
+      "Upgraded semantic search with LLM re-ranking   faster queries and measurably better medical relevance.",
       "Built zero-loss graph/table-to-Markdown conversion so structured clinical content survives the embedding pipeline intact.",
       "Implemented LLM-driven summarisation pipelines that cut hours of manual review.",
       "Shipped Streamlit demos that accelerated internal decisions and client-facing feature validation over a ~3,000-insight dataset.",
@@ -120,10 +120,10 @@ export const projects: Project[] = [
     title: "XWorld LTD",
     kicker: "AI Ecosystem Platform",
     meta: ["Software Engineer · Freelance", "Jun 2026"],
-    desc: "A one-week freelance sprint for XWorld LTD — a company building scalable AI infrastructure, enterprise automation, and the Nora AI OS.",
+    desc: "A one-week freelance sprint for XWorld LTD   a company building scalable AI infrastructure, enterprise automation, and the Nora AI OS.",
     flow: ["React UI", "Node.js API", "Python AI"],
     points: [
-      "Assembled the full platform — React frontend, Node.js API, and a Python AI layer — into one working system.",
+      "Assembled the full platform   React frontend, Node.js API, and a Python AI layer   into one working system.",
       "Built the Node.js layer that bridges the web platform and the AI services.",
       "Implemented the Python integration powering the AI Suites / Nora AI OS.",
       "Translated the Figma designs (hero, nav, vision, team, CTA) into a responsive, dark-themed frontend.",
@@ -145,7 +145,7 @@ export const projects: Project[] = [
     flow: ["corpus", "retrieval", "RBAC", "async", "monitoring"],
     points: [
       "Delivered the QA engine from document ingestion through answer retrieval.",
-      "Added security layers — RBAC, IP control, secure REST APIs — to meet compliance requirements.",
+      "Added security layers   RBAC, IP control, secure REST APIs   to meet compliance requirements.",
       "Introduced async processing and monitoring to improve performance and reliability.",
     ],
     tags: ["Python", "RAG", "LLMs", "REST APIs", "RBAC", "Async processing"],
@@ -163,20 +163,20 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    when: "Apr 2025 — Present",
+    when: "Apr 2025   Present",
     now: true,
     role: "Software Engineer",
     org: "Symmetryk AG",
     place: "remote · Switzerland",
-    text: "Owning Sym-AI's retrieval layer — embeddings, re-ranking and summarisation pipelines that turn thousands of clinical notes into fast, reliable answers.",
+    text: "Owning Sym-AI's retrieval layer   embeddings, re-ranking and summarisation pipelines that turn thousands of clinical notes into fast, reliable answers.",
   },
   {
-    when: "2025 — Present",
+    when: "2025   Present",
     now: true,
     role: "CTO & Co-Founder",
     org: "Déligo",
     place: "Marsa, Tunisia",
-    text: "Leading engineering across the stack — the NestJS API and the Expo mobile client — for a marketplace where drivers bid on transport jobs and deliveries stream live to the customer's screen.",
+    text: "Leading engineering across the stack   the NestJS API and the Expo mobile client   for a marketplace where drivers bid on transport jobs and deliveries stream live to the customer's screen.",
   },
   {
     when: "Jun 2026",
@@ -186,15 +186,15 @@ export const experience: Experience[] = [
     text: "Solo freelance sprint: stood up the React frontend, Node.js API and Python AI layer for an enterprise-automation platform and its Nora AI OS.",
   },
   {
-    when: "Nov 2024 — Apr 2025",
-    role: "Software Engineer — Sym AI",
+    when: "Nov 2024   Apr 2025",
+    role: "Software Engineer   Sym AI",
     org: "Symmetryk AG",
     place: "remote · Switzerland (Master's project)",
-    text: "Built the first iteration of the medical QA system as a Master's project — the security, async and monitoring work that took it from prototype to client-ready.",
+    text: "Built the first iteration of the medical QA system as a Master's project   the security, async and monitoring work that took it from prototype to client-ready.",
   },
   {
-    when: "Sep 2023 — Nov 2024",
-    role: "Front-End Engineer — Interaction Module",
+    when: "Sep 2023   Nov 2024",
+    role: "Front-End Engineer   Interaction Module",
     org: "Symmetryk AG",
     place: "remote · Switzerland",
     text: "Redesigned the HCP-interaction module UI and built a high-performance React.js calendar component, simplifying daily workflows for medical field teams.",
