@@ -25,13 +25,14 @@ export const navItems = [
   { id: "about", label: "About", n: "04" },
 ];
 
-export const status: { k: string; v: string; ok?: boolean; live?: boolean }[] = [
-  { k: "role", v: "Software Engineer", ok: true },
-  { k: "company", v: "Symmetryk AG · CH" },
-  { k: "founder", v: "CTO @ Déligo" },
-  { k: "based", v: "Marsa, TN" },
-  { k: "status", v: "open to talk", live: true },
-];
+export const status: { k: string; v: string; ok?: boolean; live?: boolean }[] =
+  [
+    { k: "role", v: "Software Engineer", ok: true },
+    { k: "company", v: "Symmetryk AG · CH" },
+    { k: "founder", v: "CTO @ Déligo" },
+    { k: "based", v: "Marsa, TN" },
+    { k: "status", v: "open to talk", live: true },
+  ];
 
 export type Project = {
   featured?: boolean;
@@ -58,7 +59,16 @@ export const projects: Project[] = [
       "Implemented spatial driver matching using Uber's H3 hexagonal grid (k-ring queries, heatmaps) — no PostGIS needed.",
       "Secured the API with JWT RS256 (short access + long refresh tokens) and phone-based OTP auth, plus role guards and an approved-driver gate.",
     ],
-    tags: ["NestJS", "TypeScript", "PostgreSQL", "Redis", "Socket.IO", "Uber H3", "TypeORM", "Flutter"],
+    tags: [
+      "NestJS",
+      "TypeScript",
+      "PostgreSQL",
+      "Redis",
+      "Socket.IO",
+      "Uber H3",
+      "TypeORM",
+      "Flutter",
+    ],
   },
   {
     featured: true,
@@ -73,7 +83,16 @@ export const projects: Project[] = [
       "Managed app state with Redux Toolkit and a typed Axios API layer that auto-attaches JWTs and handles refresh on 401.",
       "Added multi-language support (i18next), OTP + Google sign-in, push notifications, and image-picker driver-document uploads.",
     ],
-    tags: ["React Native", "Expo", "TypeScript", "expo-router", "Redux Toolkit", "react-native-maps", "Socket.IO", "i18next"],
+    tags: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "expo-router",
+      "Redux Toolkit",
+      "react-native-maps",
+      "Socket.IO",
+      "i18next",
+    ],
   },
   {
     featured: true,
@@ -88,7 +107,14 @@ export const projects: Project[] = [
       "Implemented LLM-driven summarisation pipelines that cut hours of manual review.",
       "Shipped Streamlit demos that accelerated internal decisions and client-facing feature validation over a ~3,000-insight dataset.",
     ],
-    tags: ["Python", "FastAPI", "sentence-transformers", "LLM / RAG", "Embeddings", "Streamlit"],
+    tags: [
+      "Python",
+      "FastAPI",
+      "sentence-transformers",
+      "LLM / RAG",
+      "Embeddings",
+      "Streamlit",
+    ],
   },
   {
     title: "XWorld LTD",
@@ -102,7 +128,14 @@ export const projects: Project[] = [
       "Implemented the Python integration powering the AI Suites / Nora AI OS.",
       "Translated the Figma designs (hero, nav, vision, team, CTA) into a responsive, dark-themed frontend.",
     ],
-    tags: ["React.js", "Node.js", "Python", "AI integration", "REST APIs", "Figma-to-code"],
+    tags: [
+      "React.js",
+      "Node.js",
+      "Python",
+      "AI integration",
+      "REST APIs",
+      "Figma-to-code",
+    ],
   },
   {
     title: "Medical QA Backend",
@@ -171,18 +204,67 @@ export const experience: Experience[] = [
 export type SkillGroup = { ix: string; nm: string; items: string[] };
 
 export const skills: SkillGroup[] = [
-  { ix: "01", nm: "Languages", items: ["Python", "TypeScript", "JavaScript", "SQL", "Dart"] },
-  { ix: "02", nm: "Backend & Real-time", items: ["NestJS", "FastAPI", "Node.js", "Flask", "Django", "Socket.IO", "REST", "TypeORM"] },
-  { ix: "03", nm: "Frontend & Mobile", items: ["React.js", "React Native", "Expo", "expo-router", "Redux Toolkit", "i18next"] },
-  { ix: "04", nm: "AI / LLM", items: ["RAG pipelines", "LLM re-ranking", "Embeddings", "Semantic search", "Ollama", "Streamlit"] },
-  { ix: "05", nm: "Data & Infrastructure", items: ["PostgreSQL", "Redis", "Docker", "Uber H3", "JWT / OTP auth", "Linux"] },
+  {
+    ix: "01",
+    nm: "Languages",
+    items: ["Python", "TypeScript", "JavaScript", "SQL", "Dart"],
+  },
+  {
+    ix: "02",
+    nm: "Backend & Real-time",
+    items: [
+      "NestJS",
+      "FastAPI",
+      "Node.js",
+      "Flask",
+      "Django",
+      "Socket.IO",
+      "REST",
+      "TypeORM",
+    ],
+  },
+  {
+    ix: "03",
+    nm: "Frontend & Mobile",
+    items: [
+      "React.js",
+      "React Native",
+      "Expo",
+      "expo-router",
+      "Redux Toolkit",
+      "i18next",
+    ],
+  },
+  {
+    ix: "04",
+    nm: "AI / LLM",
+    items: [
+      "RAG pipelines",
+      "LLM re-ranking",
+      "Embeddings",
+      "Semantic search",
+      "Ollama",
+      "Streamlit",
+    ],
+  },
+  {
+    ix: "05",
+    nm: "Data & Infrastructure",
+    items: [
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+      "Uber H3",
+      "JWT / OTP auth",
+      "Linux",
+    ],
+  },
 ];
 
 export const about = {
-  lead: "Most engineers pick a layer and live there. I'd rather own the whole path — schema, service, socket, screen.",
+  lead: "Schema, service, socket, screen. I'd rather own the whole path.",
   body: [
-    "Most of my work lives on the backend: live tracking, spatial matching, and AI/LLM pipelines that have to behave under production load. I care about clear state machines, observable systems, and APIs that are hard to misuse.",
-    "Right now I split my time between shipping medical-insight tooling for a Swiss company and building Déligo, a logistics marketplace, from the ground up.",
+    "Most of my work sits on the backend, where I focus on live tracking systems, spatial matching, and AI/LLM pipelines designed to operate reliably under production load. I care deeply about clear state machines, observable systems, and building APIs that are difficult to misuse. Currently, I split my time between shipping medical-insight tooling for a Swiss company and building Déligo, a logistics marketplace, from the ground up.",
   ],
   facts: [
     { k: "based", v: "Marsa, Tunisia", ac: true },
