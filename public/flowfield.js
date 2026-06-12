@@ -1,4 +1,4 @@
-/* Flow-field background for the hero — the v2 brand motif.
+/* Flow-field background for the hero  the v2 brand motif.
    Streamlines genuinely re-flow (the original v2 motion), kept smooth by
    precomputing the value-noise field into a grid so per-frame work is just
    cheap lookups instead of thousands of Math.sin() calls. */
@@ -7,7 +7,7 @@
   function init() {
     var canvas = document.getElementById("flowCanvas");
     if (!canvas) {
-      // React/Astro may mount the canvas a touch late — retry briefly
+      // React/Astro may mount the canvas a touch late  retry briefly
       if (tries++ < 100) setTimeout(init, 100);
       return;
     }
@@ -55,7 +55,7 @@
     function buildField() {
       // Columns must cover the visible width PLUS a full drift period so the
       // animation can scroll the phase forever and wrap seamlessly (toroidal
-      // in X) instead of running off the edge and clamping to one column —
+      // in X) instead of running off the edge and clamping to one column 
       // which is what collapsed the field into straight diagonal lines.
       var visCols = Math.ceil((W + 80) / GSTEP) + 2;
       PERX = visCols * 3;                 // periodic span = 3× the viewport
@@ -138,7 +138,7 @@
       }
     }
 
-    /* continuous re-flow — the original v2 motion, now cheap thanks to the
+    /* continuous re-flow  the original v2 motion, now cheap thanks to the
        cached field. ~20fps is smooth for this slow drift. */
     var raf = null, lastT = 0, visible = true;
     function tick(t) {

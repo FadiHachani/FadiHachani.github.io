@@ -1,5 +1,5 @@
 /* ============================================================
-   FH — Portfolio v2 "Engineering as craft"
+   FH  Portfolio v2 "Engineering as craft"
    Editorial: warm paper, ink, vermilion. Newsreader + IBM Plex Mono.
    ============================================================ */
 
@@ -106,7 +106,7 @@ button { font-family: inherit; cursor: pointer; }
 .shell { position: relative; z-index: 1; }
 
 /* ============================================================
-   NAV — thin editorial masthead
+   NAV  thin editorial masthead
    ============================================================ */
 .nav {
   position: fixed;
@@ -170,7 +170,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ============================================================
-   SECTION SCAFFOLD — journal style
+   SECTION SCAFFOLD  journal style
    ============================================================ */
 .section { padding: 110px 0 30px; }
 @media (max-width: 760px) { .section { padding: 76px 0 16px; } }
@@ -318,7 +318,7 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 760px) { .hero-strip { gap: 8px 22px; } }
 
 /* ============================================================
-   WORK — editorial entries
+   WORK  editorial entries
    ============================================================ */
 .work-list { margin-top: 64px; }
 
@@ -415,7 +415,7 @@ button { font-family: inherit; cursor: pointer; }
 .proj-stack .t:hover { color: var(--accent); }
 
 /* ============================================================
-   EXPERIENCE — ledger
+   EXPERIENCE  ledger
    ============================================================ */
 .ledger { margin-top: 64px; }
 .ledger-row {
@@ -466,7 +466,7 @@ button { font-family: inherit; cursor: pointer; }
 .ledger-now i { width: 7px; height: 7px; border-radius: 50%; background: var(--green-dot); }
 
 /* ============================================================
-   SKILLS — index columns
+   SKILLS  index columns
    ============================================================ */
 .index-grid {
   margin-top: 64px;
@@ -564,7 +564,7 @@ button { font-family: inherit; cursor: pointer; }
 .fact-row .v.ac { color: var(--accent); }
 
 /* ============================================================
-   CONTACT — closing plate + colophon
+   CONTACT  closing plate + colophon
    ============================================================ */
 .contact {
   margin-top: 110px;
@@ -620,7 +620,7 @@ button { font-family: inherit; cursor: pointer; }
 .colophon .ac { color: var(--accent); }
 
 /* ============================================================
-   REVEAL — visible by default; animated only under .motion
+   REVEAL  visible by default; animated only under .motion
    ============================================================ */
 .motion .reveal {
   opacity: 0;

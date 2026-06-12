@@ -16,7 +16,7 @@ import SectionHead from "./SectionHead.astro";
               <span class="proj-when">{p.meta.join(" · ")}</span>
             </div>
             <div>
-              <h3 class="proj-title">{p.title} <em>— {p.kicker.toLowerCase()}</em></h3>
+              <h3 class="proj-title">{p.title} <em> {p.kicker.toLowerCase()}</em></h3>
               <p class="proj-desc">{p.desc}</p>
               <ul class="proj-points">
                 {p.points.map((pt, j) => (
